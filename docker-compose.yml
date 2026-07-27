@@ -1,0 +1,67 @@
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: docker/cpu/Dockerfile
+    container_name: ai-jupyter
+    restart: unless-stopped
+
+    expose:
+      - "8888"
+
+    environment:
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:?Define JUPYTER_TOKEN in .env}
+
+    volumes:
+      - ./workspace:/workspace
+
+    command:
+      - conda
+      - run
+      - --no-capture-output
+      - -n
+      - ai
+      - jupyter
+      - lab
+      - --ip=0.0.0.0
+      - --port=8888
+      - --no-browser
+      - --allow-root
+      - --ServerApp.root_dir=/workspace
+      - --ServerApp.token=${JUPYTER_TOKEN}
+      - --ServerApp.allow_remote_access=True
+
+    networks:
+      - ai-network
+
+  caddy:
+    image: caddy:2
+    container_name: ai-caddy
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+
+    environment:
+      JUPYTER_DOMAIN: ${JUPYTER_DOMAIN:?Define JUPYTER_DOMAIN in .env}
+
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+    depends_on:
+      - jupyter
+
+    networks:
+      - ai-network
+
+networks:
+  ai-network:
+    driver: bridge
+
+volumes:
+  caddy-data:
+  caddy-config:

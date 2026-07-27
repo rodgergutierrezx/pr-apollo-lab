@@ -1,0 +1,39 @@
+name: ai
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - pip
+  - jupyterlab
+  - notebook
+  - jupyter_server
+  - ipykernel
+  - ipywidgets
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - seaborn
+  - pillow
+  - tqdm
+  - requests
+  - pyyaml
+  - plotly
+  - pip:
+      - torch
+      - torchvision
+      - torchaudio
+      - transformers
+      - datasets
+      - accelerate
+      - evaluate
+      - tokenizers
+      - sentencepiece
+      - safetensors
+      - huggingface-hub
+      - tensorboard
+      - opencv-python-headless
+      - jupyterlab-git
