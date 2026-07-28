@@ -15,8 +15,8 @@ Servidor de desarrollo para IA con:
 - Linux con Docker Engine
 - Docker Compose
 - Un dominio o subdominio apuntando a la IP pública del servidor
-- Puertos TCP 80 y 443 abiertos
-- Puerto UDP 443 opcional para HTTP/3
+- Puertos TCP 8080 y 8443 abiertos
+- Puerto UDP 8443 opcional para HTTP/3
 
 La máquina actual no necesita GPU NVIDIA.
 
@@ -66,7 +66,7 @@ docker compose logs -f
 Desde la Mac:
 
 ```text
-https://jupyter.tudominio.com
+https://jupyter.tudominio.com:8443
 ```
 
 Introduce el valor de `JUPYTER_TOKEN`.

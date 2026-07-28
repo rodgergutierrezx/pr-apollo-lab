@@ -40,9 +40,9 @@ services:
     restart: unless-stopped
 
     ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+      - "8080:80"
+      - "8443:443"
+      - "8443:443/udp"
 
     environment:
       JUPYTER_DOMAIN: ${JUPYTER_DOMAIN:?Define JUPYTER_DOMAIN in .env}
